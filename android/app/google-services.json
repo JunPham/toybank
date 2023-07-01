@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "59917096652",
+    "project_id": "ultimatekidbank",
+    "storage_bucket": "ultimatekidbank.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59917096652:android:4871168ba871f4f7ad9469",
+        "android_client_info": {
+          "package_name": "com.toybank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59917096652-r6vl64mi472cd7qkmo891rohuf0ugujh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.toybank",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "59917096652-h51o07052nto3gmvo5otb4hhr04136gs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGXNVqO4kKW0aX7et2T0DvnyTJvK_kbbk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59917096652-h51o07052nto3gmvo5otb4hhr04136gs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
