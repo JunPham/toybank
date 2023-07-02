@@ -32,12 +32,10 @@ const PropertyCard: React.FC<ItemProps> = ({ name, id, backgroundColor,price})=>
     const [star, setStar] = React.useState(0);
     const [transactionList, SetTransactionList ] = useState<FirebaseFirestoreTypes.DocumentData[]>([]);
     const [tagID, setTagID] = useState<string | undefined>(undefined);
-    const [newGame, setNewGame] = useState(false);
     const updateTagID = (tag: string):void => {
       setTagID(tag)
       addData(tag)
       getData()
-      setStar(queryCountStar)
 
     }
     const viewRef = useRef<typeof GestureFlipView>()
@@ -115,7 +113,10 @@ const PropertyCard: React.FC<ItemProps> = ({ name, id, backgroundColor,price})=>
             await getData()           
         };
         check();
-    },[])
+        setStar(queryCountStar);
+        console.log('star:' + star)
+
+    },[transactionList])
 
     const query =  cardJson.properties.filter((x)=>x?.idVn == id)
     const cardData=query.map(
@@ -126,8 +127,8 @@ const PropertyCard: React.FC<ItemProps> = ({ name, id, backgroundColor,price})=>
                     <Title style={{alignSelf:"center", fontWeight:'bold', color:'green'}}>{star*info.housecost}</Title>
                     <Stars
                     half={false}
-                    default={0}
-                    update={(val:number)=>{setStar(val); console.log(val)}}
+                    default={star}
+                    update={(val:number)=>{setStar(val)}}
                     spacing={1}
                     starSize={40}
                     count={5}
@@ -207,12 +208,12 @@ const PropertyCard: React.FC<ItemProps> = ({ name, id, backgroundColor,price})=>
                     data.push(documentSnapshot.data())
                 })
                 SetTransactionList(data);
-                console.log("load success")
+                console.log(transactionList);
             })
     }
 
-    const queryTXN =  transactionList.filter((x)=>x?.cardID == id)
-    const queryCountStar = transactionList.filter((x)=>(x?.cardID==id && x?.type==='build')).length
+    const queryTXN =  transactionList.filter((x)=>x?.cardID == id && x?.type=="buy")
+    const queryCountStar = transactionList.filter((x)=>x?.cardID == id && x?.type=="build").length
     const TxnData=queryTXN.map(
         (info)=>{
           return(
