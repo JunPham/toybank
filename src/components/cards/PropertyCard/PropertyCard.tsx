@@ -37,6 +37,8 @@ const PropertyCard: React.FC<ItemProps> = ({ name, id, backgroundColor,price})=>
       setTagID(tag)
       addData(tag)
       getData()
+      setStar(queryCountStar)
+
     }
     const viewRef = useRef<typeof GestureFlipView>()
     
@@ -110,7 +112,7 @@ const PropertyCard: React.FC<ItemProps> = ({ name, id, backgroundColor,price})=>
     useEffect(()=>{
     //    setTimeout(()=>{viewRef.current.flipLeft()},2000)
         async function check() {
-            await getData()
+            await getData()           
         };
         check();
     },[])
@@ -205,12 +207,12 @@ const PropertyCard: React.FC<ItemProps> = ({ name, id, backgroundColor,price})=>
                     data.push(documentSnapshot.data())
                 })
                 SetTransactionList(data);
-                console.log(transactionList)
+                console.log("load success")
             })
     }
 
     const queryTXN =  transactionList.filter((x)=>x?.cardID == id)
-
+    const queryCountStar = transactionList.filter((x)=>(x?.cardID==id && x?.type==='build')).length
     const TxnData=queryTXN.map(
         (info)=>{
           return(
