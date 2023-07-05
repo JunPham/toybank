@@ -4,9 +4,11 @@ import  NfcManager, {NfcEvents, NfcTech} from 'react-native-nfc-manager';
 import Lottie from 'lottie-react-native';
 import NfcHelper from '../../../NfcHelper';
 import assets from '../../../assets/animation/index'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 const proccessing = assets.lottieFiles.NfcProccessing
-const success = assets.lottieFiles.NfcSuccess
+const nfcSuccess = assets.lottieFiles.NfcSuccess
+const nfcFail = assets.lottieFiles.NfcFail
 
 interface NfcButtonProps {
     // isScan: boolean;
@@ -14,11 +16,11 @@ interface NfcButtonProps {
     updateTagID:(arg: string) =>void;
     height: number,
     width: number,
+    fail: boolean,
   }
-  const NfcAnimButton: React.FC<NfcButtonProps> = ({ updateTagID, height, width})=>{
+  const NfcAnimButton: React.FC<NfcButtonProps> = ({ updateTagID, height, width, fail})=>{
     const ScanAnimRef = useRef<Lottie>(null)
     const [nfcProcessingVisible, setNfcProcessingVisible] = useState(true);
-    const [nfcFailVisible, setNfcFailVisible] = useState(false);
     const animationProgress = useRef(new Animated.Value(0))
     // const [scanning, setScanning ] = useState(false)
     
@@ -83,10 +85,20 @@ interface NfcButtonProps {
                     />
                 </TouchableOpacity>
             }
-            {    !nfcProcessingVisible &&
+            {    !nfcProcessingVisible && !fail &&
                 <TouchableOpacity style={[styles.btn,{height, width}]} onPress={StartScan} >
                     <Lottie 
-                        source={success} 
+                        source={nfcSuccess} 
+                        autoPlay = {false}
+                        loop = {false}
+                        progress={animationProgress.current}
+                    />
+                </TouchableOpacity>
+            }
+            {    !nfcProcessingVisible && fail &&
+                <TouchableOpacity style={[styles.btn,{height, width}]} onPress={StartScan} >
+                    <Lottie 
+                        source={nfcFail} 
                         autoPlay = {false}
                         loop = {false}
                         progress={animationProgress.current}

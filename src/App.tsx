@@ -2,15 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView, FlatList, TouchableWithoutFeedback } from 'react-native';
 import NfcManager from 'react-native-nfc-manager';
 import NfcAnimButton from './components/buttons/NfcButton/NfcAnimButton';
+import AddButton from './components/buttons/NfcButton/NfcAddButton';
 import PropertyCard from './components/cards/PropertyCard/PropertyCard';
+import PlayerCard from './components/cards/PlayerCard/PlayerCard';
 import NfcHelper from './NfcHelper';
 import cardJson from './assets/PropertyCards.json'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
+import { Avatar, Button, Card, Title, Paragraph, TextInput } from 'react-native-paper';
 
 export default function App() {
   const [hasNfc, setHasNfc] = React.useState<boolean | null>(null);
   const [enabled, setEnabled] = React.useState<boolean | null>(null);
   const [tagID, setTagID] = useState<string | undefined>(undefined);
+  const [playerList, SetPlayerList ] = useState<FirebaseFirestoreTypes.DocumentData[]>([]);
 
 
   const updateTagID = (tag: string):void => {
@@ -20,18 +25,22 @@ export default function App() {
     else setTagID(tag)
     console.log(tag)
   }
+  const updatePlayerTagID = (tag: string):void => {
+    console.log(tag)
+  }
 
 
   useEffect(()=>{
-    async function checkNfc() {
+    async function check() {
       const supported = await NfcManager.isSupported();
       if (supported){
         await NfcManager.start();
         setEnabled(await NfcManager.isEnabled());
       }
       setHasNfc(supported);
+      await getData()
     }
-    checkNfc();
+    check();
 
   },[]);
 
@@ -92,7 +101,7 @@ export default function App() {
   const cardData=query.map(
     (info)=>{
       return(
-        <View style={{marginHorizontal:20, marginVertical:-30}}>
+        <View style={{marginHorizontal:30, marginVertical:-30}}>
           <PropertyCard
           key={info.id}
           name={info.nameInVn!} 
@@ -105,11 +114,44 @@ export default function App() {
     }
   )
   
+  const getData = async()=>{
+    const dataDocument = await firestore()
+        .collection("Players")
+        .get()
+        .then(querySnapshot=>{
+            const data:any=[];
+            querySnapshot.forEach(documentSnapshot =>{
+                data.push(documentSnapshot.data())
+            })
+            SetPlayerList(data);
+        })
+  } 
+
+  const addData = async(player,name)=>{
+    const dataDocument = await firestore()
+        .collection("Players")
+        .add({
+            name: name,
+            tagID: player,       
+        })
+        .then(()=>{
+            console.log('đã thêm player')                
+        })
+  }
+
+  const playerData = playerList.map(
+    (info)=>{
+      return(
+        <View style={{marginHorizontal:30, marginVertical:-30,marginTop:-10}}>
+          <PlayerCard name={info.name} playerId={info.tagID}></PlayerCard>
+        </View>
+      )
+  })
 
   return(
     <View>
       <View style={styles.SafeAreaWrapper}>
-        <NfcAnimButton updateTagID={updateTagID} height={80} width={100}/>
+        <NfcAnimButton updateTagID={updateTagID} height={80} width={100} fail={false}/>
         <View style={styles.UIDsection}>
           <Text style={[styles.sectionLabel]} >
             {tagID || '- - - - - - - - - - - - - - - - - - -'}
@@ -130,9 +172,14 @@ export default function App() {
           }
         </View>      
       </View>
-      <View>
-        <ScrollView contentContainerStyle={{ }}>
+      <View style={{marginTop:0}}>
+        <ScrollView contentContainerStyle={{height:1000, marginTop:0}}>
           {cardData}
+          {playerData}
+          <View style={[styles.cardWrapper,{flexDirection:'row', backgroundColor:'lightgreen', borderRadius:15}]}>
+            <TextInput label={'đặt tên'} style={{height:60, width:100, marginLeft:10 , borderRadius:10, backgroundColor:'transparent', fontSize:20}}></TextInput>
+            <AddButton updateTagID={updatePlayerTagID}></AddButton>
+          </View>
         </ScrollView>
       </View>
     </View>
@@ -161,7 +208,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: 'white',
     marginBottom: 30,
-    marginRight: 30,
+    marginRight: 40,
     height:40,
     flexDirection: 'row',
   },
@@ -171,8 +218,8 @@ const styles = StyleSheet.create({
     marginLeft:10
   },
   SafeAreaWrapper: {
-    marginTop:42,
-    height: 60,
+    marginTop:25,
+    height: 30,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -184,7 +231,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginHorizontal:15,
     borderRadius:8,
-  }
+  },
+  cardWrapper: {
+    height:60,
+    width:170,
+    marginHorizontal:30,
+    marginTop: 35,
+    alignSelf:'center'
+  },
 });
 
 

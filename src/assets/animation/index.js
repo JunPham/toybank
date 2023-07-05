@@ -6,6 +6,9 @@ const assets = {
         Area: require('./area.json'),
         Vancant: require('./vacant.json'),
         Start: require('./start.json'),
+        Mortgage: require('./mortgage.json'),
+        DotLoading: require('./dotLoading.json'),
+        Add: require('./add.json'),
     },
     CardCover: [
         {
