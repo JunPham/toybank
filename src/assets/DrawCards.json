@@ -1,0 +1,245 @@
+{"tiles": [
+    {
+    "id": "go"
+}, {
+    "id": "mediterraneanave"
+}, {
+    "id": "communitychest"
+}, {
+    "id": "balticave"
+}, {
+    "id": "incometax"
+}, {
+    "id": "readingrailroad"
+}, {
+    "id": "orientalave"
+}, {
+    "id": "chance"
+}, {
+    "id": "vermontave"
+}, {
+    "id": "connecticutave"
+}, {
+    "id": "jail"
+}, {
+    "id": "stcharlesplace"
+}, {
+    "id": "electriccompany"
+}, {
+    "id": "statesave"
+}, {
+    "id": "virginiaave"
+}, {
+    "id": "pennsylvaniarailroad"
+}, {
+    "id": "stjamesplace"
+}, {
+    "id": "communitychest"
+}, {
+    "id": "tennesseeave"
+}, {
+    "id": "newyorkave"
+}, {
+    "id": "freeparking"
+}, {
+    "id": "kentuckyave"
+}, {
+    "id": "chance"
+}, {
+    "id": "indianaave"
+}, {
+    "id": "illinoisave"
+}, {
+    "id": "borailroad"
+}, {
+    "id": "atlanticave"
+}, {
+    "id": "ventnorave"
+}, {
+    "id": "waterworks"
+}, {
+    "id": "marvingardens"
+}, {
+    "id": "gotojail"
+}, {
+    "id": "pacificave"
+}, {
+    "id": "northcarolinaave"
+}, {
+    "id": "communitychest"
+}, {
+    "id": "pennsylvaniaave"
+}, {
+    "id": "shortlinerailroad"
+}, {
+    "id": "chance"
+}, {
+    "id": "parkplace"
+}, {
+    "id": "luxerytax"
+}, {
+    "id": "boardwalk"
+}],
+"chance": [{
+    "title": "Advance to Go (Collect $200)",
+    "action": "move",
+    "tileid": "go",
+    "tagid": "531A9E50510001"
+}, {
+    "title": "Advance to Illinois Avenue - If you pass Go, collect $200",
+    "action": "move",
+    "tileid": "illinoiseave",
+    "tagid": "53259E50510001"
+}, {
+    "title": "Advance to St. Charles Place - If you pass Go, collect $200",
+    "action": "move",
+    "tileid": "stcharlesplace",
+    "tagid": "53169E50510001"
+}, {
+    "title": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times the amount thrown.",
+    "action": "movenearest",
+    "groupid": "utility",
+    "rentmultiplier": 10,
+    "tagid": "531D9E50510001"
+}, {
+    "title": "Advance token to the nearest Railroad and pay owner twice the rental to which he/she is otherwise entitled. If Railroad is unowned, you may buy it from the Bank.",
+    "action": "movenearest",
+    "groupid": "railroad",
+    "rentmultiplier": 2,
+    "tagid": "53249E50510001"
+}, {
+    "title": "Bank pays you dividend of $50",
+    "action": "addfunds",
+    "amount": 50,
+    "tagid": "531C9E50510001"
+}, {
+    "title": "Get out of Jail Free - This card may be kept until needed, or traded/sold",
+    "action": "jail",
+    "subaction": "getout",
+    "tagid": "53109E50510001"
+}, {
+    "title": "Go Back 3 Spaces",
+    "action": "move",
+    "count": -3,
+    "tagid": "531B9E50510001"
+}, {
+    "title": "Go to Jail - Go directly to Jail - Do not pass Go, do not collect $200",
+    "action": "jail",
+    "subaction": "goto",
+    "tagid": "531F9E50510001"
+}, {
+    "title": "Make general repairs on all your property - For each house pay $25 - For each hotel $100",
+    "action": "propertycharges",
+    "buildings": 25,
+    "hotels": 100,
+    "tagid":"53209E50510001"
+}, {
+    "title": "Pay poor tax of $15",
+    "action": "removefunds",
+    "amount": 15,
+    "tagid": "531E9E50510001"
+}, {
+    "title": "Take a trip to Reading Railroad - If you pass Go, collect $200",
+    "action": "move",
+    "tileid": "readingrailroad",
+    "tagid": "53149E50510001"
+}, {
+    "title": "Take a walk on the Boardwalk - Advance token to Boardwalk",
+    "action": "move",
+    "tileid": "boardwalk",
+    "tagid": "530F9E50510001"
+}, {
+    "title": "You have been elected Chairman of the Board - Pay each player $50",
+    "action": "removefundstoplayers",
+    "amount": 50,
+    "tagid": "53239E50510001"
+}, {
+    "title": "Your building loan matures - Collect $150",
+    "action": "addfunds",
+    "amount": 150,
+    "tagid":"53219E50510001"
+}],
+
+"communitychest": [{
+    "title": "Advance to Go (Collect $200)",
+    "action": "move",
+    "tileid": "go",
+    "tagid": "53FC7950510001"
+}, {
+    "title": "Bank error in your favor - Collect $200 ",
+    "action": "addfunds",
+    "amount": 200,
+    "tagid": "53FB7950510001"
+}, {
+    "title": "Doctor fee - Pay $50",
+    "action": "removefunds",
+    "amount": 50,
+    "tagid": "53199E50510001"
+}, {
+    "title": "From sale of stock you get $50",
+    "action": "addfunds",
+    "amount": 50,
+    "tagid": "53179E50510001"
+}, {
+    "title": "Get Out of Jail Free",
+    "action": "jail",
+    "subaction": "getout",
+    "tagid": "534B7950510001"
+}, {
+    "title": "Go to Jail - Go directly to jail - Do not pass Go - Do not collect $200",
+    "action": "jail",
+    "subaction": "goto",
+    "tagid": "53057A50510001"
+}, {
+    "title": "Grand Opera Night - Collect $50 from every player for opening night seats",
+    "action": "addfundsfromplayers",
+    "amount": 50,
+    "tagid": "53FD7950510001"
+}, {
+    "title": "Holiday Fund matures - Receive $100",
+    "action": "addfunds",
+    "amount": 100,
+    "tagid": "53F37950510001"
+}, {
+    "title": "Income tax refund - Collect $20",
+    "action": "addfunds",
+    "amount": 20,
+    "tagid": "53189E50510001"
+}, {
+    "title": "Life insurance matures - Collect $100",
+    "action": "addfunds",
+    "amount": 100,
+    "tagid": "53037A50510001"
+}, {
+    "title": "Pay hospital fees of $100",
+    "action": "removefunds",
+    "amount": 100,
+    "tagid": "534A7950510001"
+}, {
+    "title": "Pay school fees of $150",
+    "action": "removefunds",
+    "amount": 150,
+    "tagid": "53229E50510001"
+}, {
+    "title": "Receive $25 consultancy fee",
+    "action": "addfunds",
+    "amount": 25,
+    "tagid": "53047A50510001"
+}, {
+    "title": "You are assessed for street repairs - $40 per house - $115 per hotel",
+    "action": "propertycharges",
+    "buildings": 40,
+    "hotels": 115,
+    "tagid": "53FA7950510001"
+}, {
+    "title": "You have won second prize in a beauty contest - Collect $10",
+    "action": "addfunds",
+    "amount": 10,
+    "tagid": "53F27950510001"
+}, {
+    "title": "You inherit $200",
+    "action": "addfunds",
+    "amount": 200,
+    "tagid": "53027A50510001"
+}]
+}
