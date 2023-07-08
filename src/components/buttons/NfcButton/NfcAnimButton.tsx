@@ -110,14 +110,13 @@ interface NfcButtonProps {
 }
 const styles = StyleSheet.create({  
     btn: {
-        marginBottom:15,
         borderRadius: 8,
         padding: 0,
     },
     section: {
         padding: 8,
         borderRadius: 8,
-        marginBottom: 15,
+        marginTop:-24 ,
     },
   });
 export default NfcAnimButton

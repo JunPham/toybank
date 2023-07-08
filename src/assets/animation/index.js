@@ -7,8 +7,10 @@ const assets = {
         Vancant: require('./vacant.json'),
         Start: require('./start.json'),
         Mortgage: require('./mortgage.json'),
-        DotLoading: require('./dotLoading.json'),
+        DotLoading: require('./loadingDot.json'),
         Add: require('./add.json'),
+        Go: require('./go.json'),
+        Chance: require('./chance.json'),
     },
     CardCover: [
         {
